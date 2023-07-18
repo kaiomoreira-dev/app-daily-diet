@@ -1,0 +1,5 @@
+<div>
+    <div *ngFor="let snack of snacks" class="mb-2">
+        <app-snack-item (click)="edit(snack.id)" [snack]="snack"></app-snack-item>
+    </div>
+</div>

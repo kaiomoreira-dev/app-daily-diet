@@ -1,0 +1,11 @@
+<app-header></app-header>
+<app-metrics></app-metrics>
+
+<p class="text-zinc-900 text-base font-normal leading-tight mb-2 mt-10">Refeições</p>
+<btn-filled routerLink="/new-snack" label="Nova Refeição" class="mb-6"><icon-add /></btn-filled>
+<div class="mb-6"></div>
+
+<div *ngFor="let data of filterSnacksDate()" class="mb-7">
+    <span class="font-bold text-lg mb-2">{{formatDate(data.date)}}</span>
+    <app-snacks-list [snacks]="data.snacks"></app-snacks-list>
+</div>

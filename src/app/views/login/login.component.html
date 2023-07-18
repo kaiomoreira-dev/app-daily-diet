@@ -1,0 +1,14 @@
+<header class="w-full flex justify-center">
+    <app-logo width="200" height="80"></app-logo>
+</header>
+<form class="mt-10">
+    <div class="flex flex-col mb-10">
+        <span>Nome</span>
+        <input type="text" class="border-[1px] rounded-lg h-12 w-full px-4" [(ngModel)]="name" name="name">
+    </div>
+    <div class="flex flex-col mb-10">
+        <span>Email</span>
+        <input type="email" class="border-[1px] rounded-lg h-12 w-full px-4" [(ngModel)]="email" name="email">
+    </div>
+    <btn-filled label="Login" (click)="submit()"></btn-filled>
+</form>

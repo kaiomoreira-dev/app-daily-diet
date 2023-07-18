@@ -1,0 +1,36 @@
+<form>
+    <div class="flex flex-col mb-6">
+        <span>Nome</span>
+        <input class="my-input" type="text" [(ngModel)]="snack.name" name="name" />
+    </div>
+    <div class="flex flex-col mb-6">
+        <span>Descrição</span>
+        <textarea type="text" class="my-input h-24" [(ngModel)]="snack.description" name="description"></textarea>
+    </div>
+    <div class="flex gap-5 mb-6">
+        <div class="flex flex-col">
+            <span>Data</span>
+            <input class="my-input" type="text" mask="00/00/0000" name="date" [(ngModel)]="date" />
+        </div>
+        <div class="flex flex-col">
+            <span>Hora</span>
+            <input class="my-input" type="text" mask="00:00" name="time" [(ngModel)]="time" placeholder="HH:MM" />
+        </div>
+    </div>
+    <span>Está dentro da dieta?</span>
+    <div class="flex gap-2 w-full">
+        <div (click)="toogleIsDiet()"
+            [ngClass]="snack.isDiet ? 'bg-greenLight border-greenDark border-2' : 'bg-zinc-100'"
+            class="h-12 p-4 flex-1 bg-zinc-100 rounded-md justify-center items-center gap-2 inline-flex">
+            <div class="w-2 h-2 bg-greenDark rounded-full"></div>
+            <div class="text-center text-zinc-900 text-sm font-bold leading-tight">Sim</div>
+        </div>
+        <div (click)="toogleIsntDiet()" [ngClass]="isntDiet ? 'bg-redLight border-redDark border-2' : 'bg-zinc-100'"
+            class="cursor-pointer h-12 p-4 flex-1  rounded-md justify-center items-center gap-2 inline-flex">
+            <div class="w-2 h-2 bg-redDark rounded-full"></div>
+            <div class="text-center text-zinc-900 text-sm font-bold leading-tight">Não</div>
+        </div>
+    </div>
+    <btn-filled (click)="submit()" [routerLink]="snack.isDiet ? '/congratulations' : '/unsuccessful'"
+        class="absolute bottom-6 w-[352px]" [label]="isEdit ? 'Salvar Alterações' : 'Cadastrar Refeição'"></btn-filled>
+</form>

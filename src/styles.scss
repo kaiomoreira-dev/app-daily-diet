@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+html,
+body {
+	font-family: "Nunito Sans", sans-serif;
+	padding: 24px 12px 0 12px;
+}
+
+button {
+	background-color: transparent;
+}
+
+.my-input {
+	@apply border-[1px] rounded-lg w-full p-[14px] focus:border-zinc-600 focus:outline-none;
+}
+

@@ -4,6 +4,10 @@ export interface ISnack {
 	description: string;
 	date: Date;
 	time: Date;
-	isDiet: boolean | null;
+	isDiet: boolean | number;
+}
+
+export interface ISnackResponse {
+	snacks: ISnack[];
 }
 

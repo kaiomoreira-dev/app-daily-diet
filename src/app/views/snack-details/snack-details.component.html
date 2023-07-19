@@ -4,7 +4,7 @@
         <button routerLink="/"><icon-arrow-back class="absolute top-0 left-0" /></button>
         <h1 class="font-bold text-lg">Refeição</h1>
     </header>
-    <main class="bg-white mx-[-24px] px-[24px] pt-10 h-full rounded-t-3xl">
+    <main class="bg-white mx-[-24px] px-[24px] pt-10 h-full rounded-t-3xl" *ngIf="isInitialized">
         <h1 class="font-bold text-xl mb-2">{{snack.name}}</h1>
         <p class="mb-6"> {{snack.description}} </p>
         <h2 class="text-sm font-bold mb-2"> Data e hora </h2>
@@ -15,7 +15,7 @@
             <p class="text-sm"> {{snack.isDiet ? 'dentro da dieta' : 'fora da dieta'}} </p>
         </div>
         <div class="absolute bottom-6 w-[352px] flex flex-col gap-2">
-            <btn-filled routerLink="/edit-snack/id" label="Editar refeição">
+            <btn-filled [routerLink]="'/edit-snack/' + snack.id" label="Editar refeição">
                 <icon-edit /> </btn-filled>
             <btn-outline (click)="modalIsOpen = true" label="Excluir refeição"> <icon-delete /> </btn-outline>
         </div>
@@ -25,7 +25,7 @@
                     <h1 class="font-bold text-lg text-center">Deseja realmente excluir o registro da refeição?</h1>
                     <div class="flex w-full justify-center gap-3 mt-8">
                         <btn-outline (click)="modalIsOpen = false" class="flex-1" label="Cancelar"></btn-outline>
-                        <btn-filled class="flex-1" label="Confirmar"></btn-filled>
+                        <btn-filled class="flex-1" label="Confirmar" (click)="delete(snack.id)"></btn-filled>
                     </div>
                 </div>
             </div>

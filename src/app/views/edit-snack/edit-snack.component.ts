@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { ISnack } from "src/app/models/snack.model";
 import { SnackService } from "src/app/services/snack.service";
+import { map } from "rxjs";
 
 @Component({
 	selector: "app-edit-snack",
@@ -10,7 +11,15 @@ import { SnackService } from "src/app/services/snack.service";
 	styleUrls: ["./edit-snack.component.scss"],
 })
 export class EditSnackComponent implements OnInit {
-	snack: ISnack = this.intializeSnack();
+	snack: ISnack = {
+		name: "",
+		description: "",
+		date: new Date(),
+		time: new Date(),
+		isDiet: false,
+	};
+
+	isInitialized = false;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -18,36 +27,31 @@ export class EditSnackComponent implements OnInit {
 		private snackService: SnackService
 	) {}
 
-	intializeSnack() {
-		return {
-			name: "Novo",
-			description: "Teste",
-			date: new Date(),
-			time: new Date(),
-			isDiet: true,
-		};
-	}
-
-	ngOnInit(): void {
+	ngOnInit() {
 		// fazer a req e pegar pelo id
-		this.route.paramMap.subscribe(params => {
+		this.route.paramMap.subscribe(async params => {
 			const id = params.get("id");
 			if (id) {
-				this.getSnack(id);
-				console.log(id);
-				this.snack.id = id;
+				await this.getSnack(id);
+				this.snack.date = new Date(this.snack.date);
+				this.snack.time = new Date(this.snack.time);
+				console.log(this.snack);
 			}
 		});
+		this.isInitialized = true;
 	}
 
 	goBack() {
 		this.location.back();
 	}
 
-	getSnack(id: string) {
-		//		this.snackService.getSnack(id).subscribe(snack => {
-		//			this.snack = snack;
-		//		});
+	async getSnack(id: string) {
+		try {
+			const response = await this.snackService.getById(id).toPromise();
+			this.snack = response;
+		} catch (err) {
+			console.error(err);
+		}
 	}
 }
 

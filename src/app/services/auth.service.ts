@@ -18,10 +18,13 @@ export class AuthService {
 			.post<ILoginResponse>(this.url, { email, name })
 			.subscribe(response => {
 				console.log(response);
-				localStorage.setItem("user", JSON.stringify(response));
-				localStorage.setItem("idSession", response.idSession);
-				this.setCookie("idSession", response.idSession);
-				this.router.navigate(["/"]);
+				if (response.id) {
+					localStorage.setItem("user", JSON.stringify(response));
+					localStorage.setItem("idSession", response.idSession);
+					localStorage.setItem("isAuth", "true");
+					this.setCookie("idSession", response.idSession);
+					this.router.navigate(["/"]);
+				}
 			});
 	}
 

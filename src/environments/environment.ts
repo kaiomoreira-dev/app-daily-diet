@@ -1,5 +1,5 @@
 export const environment = {
 	production: false,
-	apiUrl: "https://api-dailydiet.onrender.com/api",
+	apiUrl: "http://localhost:3333/api",
 };
 

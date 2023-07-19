@@ -13,13 +13,9 @@ export class CookieInterceptorService implements HttpInterceptor {
 		request: HttpRequest<any>,
 		next: HttpHandler
 	): Observable<HttpEvent<any>> {
-		let idSession = localStorage.getItem("idSession");
-		console.log(idSession);
 		const modifiedRequest = request.clone({
-			withCredentials: true, // Permite o envio dos cookies na requisição
-			headers: request.headers.set("Cookie", `idSession=${idSession}`), // Define a informação a ser adicionada aos cookies
+			withCredentials: true,
 		});
-		console.log("aa");
 		return next.handle(modifiedRequest);
 	}
 }

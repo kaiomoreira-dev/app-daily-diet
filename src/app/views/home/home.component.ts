@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ISnack } from "src/app/models/snack.model";
+import { MetricsService } from "src/app/services/metrics.service";
 import { SnackService } from "src/app/services/snack.service";
 
 @Component({
@@ -8,40 +9,28 @@ import { SnackService } from "src/app/services/snack.service";
 	styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-	snacks: ISnack[] = [
-		{
-			id: "123",
-			name: "Salada",
-			description: "com bacon",
-			date: new Date("2023-07-10T10:10:00"),
-			time: new Date("2023-07-10T10:10:00"),
-			isDiet: true,
-		},
-		{
-			id: "2344",
-			name: "X-Tudo",
-			description: "com bacon",
-			date: new Date("2023-07-10T10:10:00"),
-			time: new Date("2023-07-10T11:10:00"),
-			isDiet: false,
-		},
-		{
-			id: "eda32423",
-			name: "Whey protein com leite",
-			description: "super saudavel",
-			date: new Date("2023-07-12T12:00:00"),
-			time: new Date("2023-07-12T12:00:00"),
-			isDiet: true,
-		},
-	];
+	snacks: ISnack[] = [];
+	metricsPercent = 0;
 
-	constructor(private snackService: SnackService) {}
+	constructor(
+		private snackService: SnackService,
+		private metricsService: MetricsService
+	) {}
 
 	ngOnInit(): void {
-		this.snackService.getAll().subscribe(data => {
-			console.log(data);
-			this.snacks = data;
+		this.snackService.getAll().subscribe(snacks => {
+			this.snacks = snacks.snacks;
+			console.log(snacks);
+			this.snacks.map(snack => {
+				snack.date = new Date(snack.date);
+				snack.time = new Date(snack.time);
+			});
+			this.metricsPercent = this.metricsService.calculePercentOfSnacks(this.snacks);
 		});
+	}
+
+	ngOnChange() {
+		this.metricsPercent = this.metricsService.calculePercentOfSnacks(this.snacks);
 	}
 
 	filterSnacksDate() {
@@ -65,13 +54,18 @@ export class HomeComponent implements OnInit {
 			snacks: snacks,
 		}));
 
-		console.log(result);
+		// Ordenar os arrays de snacks em ordem decrescente pelo atributo time
+		result.forEach(item => {
+			item.snacks.sort((a, b) => b.time.getTime() - a.time.getTime());
+		});
+
+		result.sort((a, b) => b.date.getTime() - a.date.getTime());
+
 		return result;
 	}
 
 	formatDate(date: Date) {
-		return `${date.getDate().toString().padStart(2, "0")}.${date
-			.getMonth()
+		return `${date.getDate().toString().padStart(2, "0")}.${(date.getMonth() + 1)
 			.toString()
 			.padStart(2, "0")}.${date.getFullYear()}`;
 	}

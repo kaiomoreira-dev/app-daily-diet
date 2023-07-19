@@ -10,7 +10,7 @@ export class SnackItemComponent {
 	@Input() snack!: ISnack;
 
 	formatTime(time: Date) {
-		let hour = time.getHours().toString();
+		let hour = time.getHours().toString().padStart(2, "0");
 		let minute = time.getMinutes().toString();
 
 		if (minute === "0") {

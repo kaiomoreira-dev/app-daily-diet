@@ -4,7 +4,7 @@
         <button routerLink="/"><icon-arrow-back class="absolute top-0 left-0"
                 [color]="metricsPercent >= 60 ? '#639339' : '#BF3B44'" /></button>
 
-        <span class="font-bold text-4xl">{{metricsPercent}}%</span>
+        <span class="font-bold text-4xl">{{metricsPercent.toString().replace(".", ",")}}%</span>
         <p class="text-[14px] mb-6">das refeições dentro da dieta</p>
 
     </div>

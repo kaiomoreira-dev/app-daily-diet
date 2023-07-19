@@ -15,7 +15,7 @@ export class AuthService {
 
 	login(email: string, name: string) {
 		return this.http
-			.post<ILoginResponse>(this.url, { email, name })
+			.post<any>(this.url, { email, name }, { withCredentials: true })
 			.subscribe(response => {
 				console.log(response);
 				if (response.id) {
@@ -23,6 +23,12 @@ export class AuthService {
 					localStorage.setItem("idSession", response.idSession);
 					localStorage.setItem("isAuth", "true");
 					this.setCookie("idSession", response.idSession);
+					this.router.navigate(["/"]);
+				} else if (response.users.id) {
+					localStorage.setItem("user", JSON.stringify(response.users));
+					localStorage.setItem("idSession", response.users.idSession);
+					localStorage.setItem("isAuth", "true");
+					this.setCookie("idSession", response.users.idSession);
 					this.router.navigate(["/"]);
 				}
 			});

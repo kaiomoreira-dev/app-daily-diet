@@ -1,1 +1,33 @@
-<p>statistics works!</p>
+<div class="mt-[-50px] mx-[-24px] pt-[50px] px-[24px] vh-100"
+    [ngClass]="metricsPercent >= 60 ? 'bg-greenLight' : 'bg-redLight'">
+    <div class="flex flex-col justify-center items-center relative pt-6">
+        <button routerLink="/"><icon-arrow-back class="absolute top-0 left-0"
+                [color]="metricsPercent >= 60 ? '#639339' : '#BF3B44'" /></button>
+
+        <span class="font-bold text-4xl">{{metricsPercent}}%</span>
+        <p class="text-[14px] mb-6">das refeições dentro da dieta</p>
+
+    </div>
+    <main class="bg-white mx-[-24px] px-[24px] pt-10 h-full rounded-t-3xl flex flex-col items-center justify-center">
+        <h2 class="font-bold text-sm mb-6">Estatísticas gerais</h2>
+        <div class="p-4 flex flex-col justify-center items-center gap-2 self-stretch bg-zinc-100 rounded-lg mb-3">
+            <h1 class="font-bold text-xl">{{bestSequency}}</h1>
+            <span class="text-sm">melhor sequência de pratos dentro da dieta</span>
+        </div>
+        <div class="p-4 flex flex-col justify-center items-center gap-2 self-stretch bg-zinc-100 rounded-lg mb-3">
+            <h1 class="font-bold text-xl">{{snacks.length}}</h1>
+            <span class="text-sm">refeições registradas</span>
+        </div>
+        <div class="flex gap-3">
+
+            <div class="p-4 flex flex-col justify-center items-center gap-2 self-stretch bg-greenLight rounded-lg mb-3">
+                <h1 class="font-bold text-xl">{{snacksInDiet}}</h1>
+                <span class="text-sm text-center">refeições dentro da dieta</span>
+            </div>
+            <div class="p-4 flex flex-col justify-center items-center gap-2 self-stretch bg-redLight rounded-lg mb-3">
+                <h1 class="font-bold text-xl">{{snacksOutDiet}}</h1>
+                <span class="text-sm text-center">refeições fora da dieta</span>
+            </div>
+        </div>
+    </main>
+</div>

@@ -32,5 +32,9 @@ export class AuthService {
 		const cookie = `${name}=${encodeURIComponent(value)};`;
 		document.cookie = cookie;
 	}
+
+	getUser(id: string): Observable<any> {
+		return this.http.get(this.url + "/" + id, { withCredentials: true });
+	}
 }
 

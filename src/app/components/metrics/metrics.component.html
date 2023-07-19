@@ -1,4 +1,4 @@
-<button [style.background]="metricsColor" *ngIf="metricsPercent !== undefined"
+<button [style.background]="metricsColor" *ngIf="metricsPercent !== undefined" routerLink="/metrics"
     class="w-full relative py-5 px-4 rounded-lg mt-10 flex flex-col justify-center items-center">
     <button class="absolute top-2 right-2"><icon-arrow-right [color]="iconColor" /></button>
     <span class="font-bold text-4xl">{{metricsPercent}}%</span>

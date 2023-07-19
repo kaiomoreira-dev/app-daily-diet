@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 		});
 	}
 
-	ngOnChange() {
+	ngOnChanges() {
 		this.metricsPercent = this.metricsService.calculePercentOfSnacks(this.snacks);
 	}
 

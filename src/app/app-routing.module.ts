@@ -8,6 +8,7 @@ import { UnsuccessfulComponent } from "./views/unsuccessful/unsuccessful.compone
 import { EditSnackComponent } from "./views/edit-snack/edit-snack.component";
 import { SnackDetailsComponent } from "./views/snack-details/snack-details.component";
 import { AuthGuard } from "./guards/auth-guard.guard";
+import { StatisticsComponent } from "./views/statistics/statistics.component";
 
 const routes: Routes = [
 	{
@@ -42,6 +43,11 @@ const routes: Routes = [
 	{
 		path: "unsuccessful",
 		component: UnsuccessfulComponent,
+		canActivate: [AuthGuard],
+	},
+	{
+		path: "metrics",
+		component: StatisticsComponent,
 		canActivate: [AuthGuard],
 	},
 ];

@@ -23,5 +23,25 @@ export class MetricsService {
 		if (result) return result;
 		else return 0;
 	}
+
+	getQtdIsDiet(snacks: ISnack[]) {
+		let isDietQtd: number = 0;
+		snacks.map(snack => {
+			if (snack.isDiet) {
+				isDietQtd++;
+			}
+		});
+		return isDietQtd;
+	}
+
+	getQtdNotIsDiet(snacks: ISnack[]) {
+		let isntDietQtd: number = 0;
+		snacks.map(snack => {
+			if (!snack.isDiet) {
+				isntDietQtd++;
+			}
+		});
+		return isntDietQtd;
+	}
 }
 

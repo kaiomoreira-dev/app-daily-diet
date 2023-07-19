@@ -7,11 +7,13 @@ import { SuccessComponent } from "./views/success/success.component";
 import { UnsuccessfulComponent } from "./views/unsuccessful/unsuccessful.component";
 import { EditSnackComponent } from "./views/edit-snack/edit-snack.component";
 import { SnackDetailsComponent } from "./views/snack-details/snack-details.component";
+import { AuthGuard } from "./guards/auth-guard.guard";
 
 const routes: Routes = [
 	{
 		path: "",
 		component: HomeComponent,
+		canActivate: [AuthGuard],
 	},
 	{
 		path: "login",
@@ -20,22 +22,27 @@ const routes: Routes = [
 	{
 		path: "new-snack",
 		component: NewSnackComponent,
+		canActivate: [AuthGuard],
 	},
 	{
 		path: "edit-snack/:id",
 		component: EditSnackComponent,
+		canActivate: [AuthGuard],
 	},
 	{
 		path: "snack-details/:id",
 		component: SnackDetailsComponent,
+		canActivate: [AuthGuard],
 	},
 	{
 		path: "congratulations",
 		component: SuccessComponent,
+		canActivate: [AuthGuard],
 	},
 	{
 		path: "unsuccessful",
 		component: UnsuccessfulComponent,
+		canActivate: [AuthGuard],
 	},
 ];
 
